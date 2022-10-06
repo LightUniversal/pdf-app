@@ -1,0 +1,15 @@
+Things to achieve.
+    1. register new users
+    2. registered users being able to login, logout and signout.
+
+    3. Registered Users adding post, updating post, comment on  post and deleting post.
+    4. create chats for registered users.
+
+    Task to achieve today
+    1. Login with correct profile pic
+    2. Create chat room for private and general chat\
+    3. Create various rooms for registered users to join.
+    4. Register users to a the selected room.
+    5  Users that are not registered cannot chat in any room.
+    6. Display online users.
+    10. Each room should have their logo.

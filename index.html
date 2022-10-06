@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Faculty of Engineering News">
+  <meta name="keywords"
+    content="feg, faculty of engineering, engineering news, unizik engineering, unizik news, feg news">
+  <meta name="robots" content="nofollow">
+  <meta http-equiv="author" content="Ifezulumba Light">
+  <meta http-equiv="pragma" content="no-cache">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@0;1&family=Comfortaa:wght@300&family=Didact+Gothic&family=Stint+Ultra+Condensed&family=Zilla+Slab&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <title>Engineering News</title>
+</head>
+
+<body>
+  <div class="weather"></div>
+  <div class="menu-btn">
+    <i class="fa fa-bars fa-2x"></i>
+  </div>
+  <nav class="main-nav">
+    <h3 class="logo">LME</h3>
+
+    <ul class="main-menu">
+      <li><a href="#" id="home">Home</a></li>
+      <li><a href="#" id="reg">Register</a></li>
+      <li><a href="#" id="log">Login</a></li>
+      <li><a href="#" id="room">Chat room</a></li>
+      <li><a href="#" id="files">Files</a></li>
+      <li><a href="#" id="support">Support</a></li>
+      <li><a href="#" id="sign-out">Sign-out <i class="fa fa-sign-out"></i></a></li>
+      <div class="profile"><img src="" alt="profile" id="profile"> <span></span></div>
+
+    </ul>
+  </nav>
+  <div class="container box">
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA7St2LlyQU9R7Bo7PbOrLrcB2CBKaLZX4",
+      authDomain: "feghall.firebaseapp.com",
+      projectId: "feghall",
+      storageBucket: "feghall.appspot.com",
+      messagingSenderId: "688219127903",
+      appId: "1:688219127903:web:01c3f448206055da0cdbea",
+      measurementId: "G-Q53STX641Z"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // reference to auth ,firestore and storage
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"
+    integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js"
+    integrity="sha512-lHibs5XrZL9hXP3Dhr/d2xJgPy91f2mhVAasrSbMkbmoTSm2Kz8DuSWszBLUg31v+BM6tSiHSqT72xwjaNvl0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    class Temp {
+      constructor() {
+        this.dets = document.querySelector('div.weather');
+        this.city = 'Anambra';
+        this.key = 'TU4Yhsj1wEAwVsdMUhQt6iq6CxzUL4tV';
+      }
+      async getWeather() {
+        const id = await this.weather()
+        .then((data)=> {
+            return data.Key;
+        })
+        const base = 'https://dataservice.accuweather.com/currentconditions/v1/';
+        const query = `${id}?apikey=${this.key}`;
+        const res = await fetch(base + query);
+        const data = await res.json();
+        return data[0];
+    }
+    async weather() {
+        const base = 'https://dataservice.accuweather.com/locations/v1/cities/search';
+        const query = `?apikey=${this.key}&q=${this.city}`;
+
+        const res = await fetch(base + query);
+        const data = await res.json();
+        return data[0];
+    }
+    }
+    const condition = new Temp();
+    document.addEventListener('DOMContentLoaded', ()=> {
+    condition.weather()
+    condition.getWeather()
+    .then((data)=> {
+        if(data.IsDayTime) {
+            condition.dets.innerHTML = `<span><i class="fa fa-cloud"></i><i class="fa fa-sun-o state-weather"></i></span>
+            <br>
+            ${data.WeatherText} ${data.Temperature.Metric.Value}&deg;C`;
+        } else {
+            condition.dets.innerHTML = `<span><i class="fa fa-cloud"></i><i class="fa fa-moon-o state-weather"></i></span>
+            <br>
+            ${data.WeatherText} ${data.Temperature.Metric.Value}&deg;C`;
+        }
+    });
+})
+  </script>
+ <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+      AOS.init({
+          offset:300,
+          duration:1100
+      }); 
+  </script>
+  <script src="js/state.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+
+</html>
